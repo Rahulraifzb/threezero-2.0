@@ -1,3 +1,4 @@
+import django_heroku
 import os
 from pathlib import Path
 
@@ -28,11 +29,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "core.backend.quiz.apps.QuizConfig",
     "core.backend.authentication.apps.AuthenticationConfig",
+    "core.backend.home.apps.HomeConfig",
     "ckeditor",
-    "taggit"
+    "taggit",
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -110,11 +113,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [ 
     os.path.join(BASE_DIR,"static")
 ]
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join("media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -127,4 +134,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'rahul.rai@shepple.com'
 EMAIL_HOST_PASSWORD = 'iznhixsimnzoctcf'
 
-AUTH_USER_EMAIL_UNIQUE = True
+django_heroku.settings(locals())
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
