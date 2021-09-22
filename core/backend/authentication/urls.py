@@ -5,7 +5,8 @@ from .views import *
 urlpatterns = [
     path("register/",register,name="register"),
     path("login/",mylogin,name="login"),
-    path("logout/",logout,name="logout"),
+    path("logout/",mylogout,name="logout"),
+    path("settings/",accounts_settings,name="settings"),
 
 
     ######## Password Reset Url #########

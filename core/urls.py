@@ -7,7 +7,9 @@ urlpatterns = [
     path('auth/', admin.site.urls),
     path("",include("core.backend.home.urls")),
     path("",include("core.backend.quiz.urls")),
-    path("",include("core.backend.authentication.urls"))
+    path("",include("core.backend.authentication.urls")),
+    path("student/",include("core.backend.student.urls")),
+    path("dashboard/",include("core.backend.owner.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

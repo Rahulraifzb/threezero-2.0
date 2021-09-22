@@ -70,6 +70,8 @@
 
      <script src="{% static 'app-assets/js/scripts/components/components-alerts.js' %}"></script>
 
+         
+
     <script>
         $(window).on('load', function() {
             if (feather) {
@@ -79,6 +81,10 @@
                 });
             }
         })
+        themeSetting = "{{request.user.profile.get_theme_setting}}"
+        if (themeSetting === "dark_theme"){
+            document.getElementById("html").classList.add("dark-layout")
+        }
     </script>
 </body>
 <!-- END: Body-->

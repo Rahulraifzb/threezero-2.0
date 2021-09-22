@@ -1,0 +1,488 @@
+{% extends "layouts/base.html" %}
+{% block title %} Settings {% endblock title %}
+{% block content %}
+
+     <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Account Settings</h2>
+                            <div class="breadcrumb-wrapper">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item active"> Account Settings
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- account setting page -->
+                <section id="page-account-settings">
+                    <div class="row">
+                        <!-- left menu section -->
+                        <div class="col-md-3 mb-2 mb-md-0">
+                            <ul class="nav nav-pills flex-column nav-left">
+                                <!-- general -->
+                                <li class="nav-item settings-nav-item " data-tab="general-tabs" >
+                                    <a class="nav-link general-tabs" id="account-pill-general" data-toggle="pill" href="#general" aria-expanded="true">
+                                        <i data-feather="user" class="font-medium-3 mr-1"></i>
+                                        <span class="font-weight-bold">General</span>
+                                    </a>
+                                </li>
+                                <!-- change password -->
+                                <li class="nav-item settings-nav-item " data-tab="change-password-tabs">
+                                    <a class="nav-link change-password-tabs" id="account-pill-password" data-toggle="pill" href="#change-password" aria-expanded="false">
+                                        <i data-feather="lock" class="font-medium-3 mr-1"></i>
+                                        <span class="font-weight-bold">Change Password</span>
+                                    </a>
+                                </li>
+                                <!-- information -->
+                                <li class="nav-item settings-nav-item" data-tab="information-tabs">
+                                    <a class="nav-link information-tabs" id="account-pill-info" data-toggle="pill" href="#information" aria-expanded="false">
+                                        <i data-feather="info" class="font-medium-3 mr-1"></i>
+                                        <span class="font-weight-bold">Information</span>
+                                    </a>
+                                </li>
+                                <!-- social -->
+                                <li class="nav-item settings-nav-item " data-tab="social-tabs">
+                                    <a class="nav-link social-tabs" id="account-pill-social" data-toggle="pill" href="#social" aria-expanded="false">
+                                        <i data-feather="link" class="font-medium-3 mr-1"></i>
+                                        <span class="font-weight-bold">Social</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/ left menu section -->
+
+                        <!-- right content section -->
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <!-- general tab -->
+                                        <div role="tabpanel" class="tab-pane fade" id="general-tabs" aria-labelledby="account-pill-general" aria-expanded="true">
+                                            <!-- header media -->
+                                              {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                    <div class="alert-body">
+                                                        {{message}}
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% if user_update_form.errors or profile_update_form.errors %}
+
+                                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                    <div class="alert-body">
+                                                    <h5>Please fix the following errors</h5>
+                                                    <ul class="mb-0">
+                                                        {% for field in user_update_form %}
+                                                        {% if field.errors %}
+                                                            {% for error in field.errors %}
+                                                            <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                    <ul>
+                                                        {% for field in profile_update_form %}
+                                                        {% if field.errors %}
+                                                            {% for error in field.errors %}
+                                                            <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% if user_update_form.non_field_errors or profile_update_form.non_field_errors  %}
+                                                        {{ user_update_form.non_field_errors }}
+                                                        {{ profile_update_form.non_field_errors }}
+                                                    {% endif %}
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            {% endif %}
+                                          
+                                            <form class="validate-form mt-2" id="general-settings" method="POST" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                
+                                            <div class="media">
+                                                <a href="javascript:void(0);" class="mr-25">
+                                                    <img src="{{request.user.profile.get_image_url}}" id="account-upload-img" class="rounded mr-50" alt="profile image" height="80" width="80" />
+                                                </a>
+                                                <!-- upload and reset button -->
+                                                <div class="media-body mt-75 ml-1">
+                                                    <div class="d-inline-block">
+                                                    {{profile_update_form.image}}
+                                                    <label for="account-upload" class="btn btn-sm btn-primary mb-75 mr-75">Upload</label>
+                                                    <!-- <input type="file" id="account-upload" hidden accept="image/*" /> -->
+                                                    </div>
+                                                    <p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+                                                </div>
+                                                <!--/ upload and reset button -->
+                                            </div>
+                                            <!--/ header media -->
+
+                                            <!-- form -->
+                                            
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-name">First Name</label>
+                                                            <!-- <input type="text" class="form-control" id="account-name" name="name" placeholder="Name" value="John Doe" /> -->
+                                                            {{user_update_form.first_name}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-name">Last Name</label>
+                                                            <!-- <input type="text" class="form-control" id="account-name" name="name" placeholder="Name" value="John Doe" /> -->
+                                                            {{user_update_form.last_name}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-username">Username</label>
+                                                            <!-- <input type="text" class="form-control" id="account-username" name="username" placeholder="Username" value="johndoe" /> -->
+                                                            {{user_update_form.username}}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-e-mail">E-mail</label>
+                                                            <!-- <input type="email" class="form-control" id="account-e-mail" name="email" placeholder="Email" value="granger007@hogward.com" /> -->
+                                                            {{user_update_form.email}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <label for="phone-number">Phone Number</label>
+                                                        <div class="input-group input-group-merge">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">IN (+91)</span>
+                                                            </div>
+                                                            <!-- <input type="text" class="form-control phone-number-mask" placeholder="1 234 567 8900" name="phoneNumber" id="phone-number" /> -->
+                                                            {{profile_update_form.mobile}}
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-12">
+                                                        <button type="submit" class="btn btn-primary mt-2 mr-1" name ="general_form">Save changes</button>
+                                                        <button type="reset" class="btn btn-outline-secondary mt-2">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!--/ form -->
+                                        </div>
+                                        <!--/ general tab -->
+
+                                        <!-- change password -->
+                                        <div class="tab-pane fade" id="change-password-tabs" role="tabpanel" aria-labelledby="account-pill-password" aria-expanded="false">
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                    <div class="alert-body">
+                                                        {{message}}
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+
+
+
+                                            {% if password_change_from.errors %}
+                                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                    <div class="alert-body">
+                                                    <h4>Please fix the following errors</h4>
+                                                    <ul>
+                                                        {% for field in password_change_from %}
+                                                        {% if field.errors %}
+                                                            {% for error in field.errors %}
+                                                            <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% if password_change_from.non_field_errors %}
+                                                        {{ password_change_from.non_field_errors }}
+                                                    {% endif %}
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            {% endif %}
+
+
+                                            <!-- form -->
+                                            <form class="validate-form" id="password-change" method="POST" name="password-change">
+                                                {% csrf_token %}
+                                                
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-old-password">Old Password</label>
+                                                            <div class="input-group form-password-toggle input-group-merge">
+                                                                <!-- <input type="password" class="form-control" id="old-password" name="password" placeholder="Old Password" /> -->
+                                                                {{password_change_from.old_password}}
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text cursor-pointer">
+                                                                        <i data-feather="eye"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-new-password">New Password</label>
+                                                            <div class="input-group form-password-toggle input-group-merge">
+                                                                <!-- <input type="password" id="new-password" name="new-password" class="form-control" placeholder="New Password" /> -->
+                                                                {{password_change_from.new_password1}}
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text cursor-pointer">
+                                                                        <i data-feather="eye"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-retype-new-password">Retype New Password</label>
+                                                            <div class="input-group form-password-toggle input-group-merge">
+                                                                <!-- <input type="password" class="form-control" id="retype-new-password" name="confirm-new-password" placeholder="New Password" /> -->
+                                                                {{password_change_from.new_password2}}
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text cursor-pointer"><i data-feather="eye"></i></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button type="submit" class="btn btn-primary mr-1 mt-1" name="change_password_form">Save changes</button>
+                                                        <button type="reset" class="btn btn-outline-secondary mt-1">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!--/ form -->
+                                        </div>
+                                        <!--/ change password -->
+
+                                        <!-- information -->
+                                        <div class="tab-pane fade" id="information-tabs" role="tabpanel" aria-labelledby="account-pill-info" aria-expanded="false">
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                    <div class="alert-body">
+                                                        {{message}}
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+
+
+                                            <!-- form -->
+                                            <form class="validate-form" method="POST" name="information">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="accountTextarea">Bio</label>
+                                                           <!-- <textarea class="form-control" id="accountTextarea" rows="4" placeholder="Your Bio data here..."></textarea> -->
+                                                            {{profile_update_form.bio}} 
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-birth-date">Birth date</label>
+                                                            <!-- <input type="text" class="form-control flatpickr" placeholder="Birth date" id="account-birth-date" name="dob" /> -->
+                                                            {{profile_update_form.birthday}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="accountSelect">State</label>
+                                                            {{profile_update_form.state}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-website">Website</label>
+                                                            <!-- <input type="text" class="form-control" name="website" id="account-website" placeholder="Website address" /> -->
+                                                            {{profile_update_form.website}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-address">Street Address</label>
+                                                            <!-- <input type="text" class="form-control" id="account-address" placeholder="Street Address....." name="address" /> -->
+                                                            {{profile_update_form.street_address}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button type="submit" class="btn btn-primary mt-1 mr-1" name="information_form">Save changes</button>
+                                                        <button type="reset" class="btn btn-outline-secondary mt-1">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!--/ form -->
+                                        </div>
+                                        <!--/ information -->
+
+                                        <!-- social -->
+                                        <div class="tab-pane fade" id="social-tabs" role="tabpanel" aria-labelledby="account-pill-social" aria-expanded="false">
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                    <div class="alert-body">
+                                                        {{message}}
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+
+                                            {% if social_update_form.errors %}
+                                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                    <div class="alert-body">
+                                                    <h4>Please fix the following errors</h4>
+                                                    <ul>
+                                                        {% for field in social_update_form %}
+                                                        {% if field.errors %}
+                                                            {% for error in field.errors %}
+                                                            <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% if social_update_form.non_field_errors %}
+                                                        {{ social_update_form.non_field_errors }}
+                                                    {% endif %}
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            {% endif %}
+
+
+                                            <!-- form -->
+                                            <form class="validate-form" method="POST" name="social">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <!-- social header -->
+                                                    <div class="col-12">
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <i data-feather="link" class="font-medium-3"></i>
+                                                            <h4 class="mb-0 ml-75">Social Links</h4>
+                                                        </div>
+                                                    </div>
+                                                    <!-- twitter link input -->
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-twitter">Github</label>
+                                                            <!-- <input type="text" id="account-twitter" class="form-control" placeholder="Add link" value="https://www.twitter.com" /> -->
+                                                            {{social_update_form.github}}
+                                                        </div>
+                                                    </div>
+                                                    <!-- facebook link input -->
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-facebook">LinkedIn</label>
+                                                            <!-- <input type="text" id="account-facebook" class="form-control" placeholder="Add link" /> -->
+                                                            {{social_update_form.linkedIn}}
+                                                        </div>
+                                                    </div>
+                                                    <!-- google plus input -->
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-google">Skype</label>
+                                                            <!-- <input type="text" id="account-google" class="form-control" placeholder="Add link" /> -->
+                                                            {{social_update_form.skype}}
+                                                        </div>
+                                                    </div>
+                                                    <!-- linkedin link input -->
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-linkedin">Facebook</label>
+                                                            <!-- <input type="text" id="account-linkedin" class="form-control" placeholder="Add link" value="https://www.linkedin.com" /> -->
+                                                            {{social_update_form.facebook}}
+                                                        </div>
+                                                    </div>
+                                                    <!-- instagram link input -->
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-instagram">Instagram</label>
+                                                            <!-- <input type="text" id="account-instagram" class="form-control" placeholder="Add link" /> -->
+                                                            {{social_update_form.instagram}}
+                                                        </div>
+                                                    </div>
+                                                    <!-- Quora link input -->
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="account-quora">Twitter</label>
+                                                            <!-- <input type="text" id="account-youtube" class="form-control" placeholder="Add link" /> -->
+                                                            {{social_update_form.twitter}}
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- divider -->
+                                                    <div class="col-12">
+                                                        <hr class="my-2" />
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <!-- submit and cancel button -->
+                                                        <button type="submit" class="btn btn-primary mr-1 mt-1" name="social_form">Save changes</button>
+                                                        <button type="reset" class="btn btn-outline-secondary mt-1">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!--/ form -->
+                                        </div>
+                                        <!--/ social -->
+
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ right content section -->
+                    </div>
+                </section>
+                <!-- / account setting page -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+<script src="/static/assets/js/account-settings.js"></script>
+
+{% endblock content %}

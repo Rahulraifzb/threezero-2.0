@@ -1,0 +1,285 @@
+{% extends "layouts/base.html" %}
+{% block title %}Student Dashboard{% endblock title %}
+{% block content %}
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title text-center mb-0">Dashboard</h2>
+                            <hr class="w-50">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-detached content-left">
+                <div class="content-body">
+                    <!-- Blog List -->
+                    <div class="blog-list-wrapper">
+                        <!-- Blog List Items -->
+                        <div class="row">
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                    <a href="{% url "settings" %}">
+                                        <i data-feather='user-check' style="width: 3rem;height: 3rem;"></i>
+                                    </s>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="{% url "settings" %}" class="blog-title-truncate text-body-heading">
+                                                Update your profile</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i class="fas fa-layer-group" style="font-size:3rem"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                Update your profile</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center  text-primary mt-2">
+                                        <i data-feather='play-circle' style="width: 3rem;height: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                Video & Codes</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i data-feather='book-open' style="width: 3rem;height: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                               Today's Task</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i class="far fa-file-pdf"  style="font-size:3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                PDF Notes
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i data-feather='download' style="width: 3rem;height: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                Download Software
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i class="fas fa-coins" style="font-size: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading" style="font-size: 16px;">
+                                                Generate Token to solve error
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i class="fas fa-list-ol" style="font-size: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                Online Test
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i data-feather='file' style="width: 3rem;height: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                Test Result
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i data-feather='message-circle' style="width: 3rem;height: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                Discussion Forum
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i data-feather='star' style="width: 3rem;height: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                Sent Feedback
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="card">
+                                    <div class="text-center text-primary mt-2">
+                                        <i data-feather='help-circle' style="width: 3rem;height: 3rem;"></i>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">
+                                            <a href="javascript:void(0)" class="blog-title-truncate text-body-heading">
+                                                Help
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--/ Blog List Items -->
+                    </div>
+                    <!--/ Blog List -->
+
+                </div>
+            </div>
+            <div class="sidebar-detached sidebar-right">
+                <div class="sidebar">
+                    <div class="blog-sidebar my-2 my-lg-0">
+                        <!-- Search bar -->
+                        <div class="shadow-lg text-center px-2 py-1">
+                            <h4 class="mb-0">Live Streaming</h4>
+                        </div>
+                        <!--/ Search bar -->
+
+                        <div class="my-1">
+                            <div class="card card-profile">
+                                <img src="/static/app-assets/images/banner/banner-12.jpg" class="img-fluid card-img-top" alt="Profile Cover Photo" />
+                                <div class="card-body">
+                                    <div class="profile-image-wrapper">
+                                        <div class="profile-image">
+                                            <div class="avatar">
+                                                <img src="/static/app-assets/images/portrait/small/avatar-s-9.jpg" alt="Profile Picture" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>Curtis Stone</h3>
+                                    <h6 class="text-muted">Malaysia</h6>
+                                    <ul class="list-inline m-0">
+                                        <li class="list-inline-item ">
+                                            <a href="javascript:void(0);" >
+                                                <i data-feather='github' class="font-medium-2"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item ">
+                                            <a href="javascript:void(0);" >
+                                                <i data-feather='linkedin' class="font-medium-2"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item ">
+                                            <a href="javascript:void(0);" >
+                                                <i class="fab fa-skype font-medium-2" ></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item ">
+                                            <a href="javascript:void(0);" >
+                                               <i data-feather='twitter' class="font-medium-2"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                                <a href="javascript:void(0);">
+                                                    <i data-feather='facebook' class="font-medium-2"></i>
+                                                </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                         
+                                                <a href="javascript:void(0);">
+                                                    <i data-feather='instagram' class="font-medium-2"></i>
+                                                </a>
+                                        </li>
+                                        
+                                        
+                                    </ul>
+                                    <hr class="mb-2" />
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="text-muted font-weight-bolder">Followers</h6>
+                                            <h3 class="mb-0">10.3k</h3>
+                                        </div>
+                                        <div>
+                                            <h6 class="text-muted font-weight-bolder">Projects</h6>
+                                            <h3 class="mb-0">156</h3>
+                                        </div>
+                                        <div>
+                                            <h6 class="text-muted font-weight-bolder">Rank</h6>
+                                            <h3 class="mb-0">23</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+{% endblock content %}

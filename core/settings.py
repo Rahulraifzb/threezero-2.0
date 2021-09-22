@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b#ftx^6c+i+kchyn584nci^@5=q-x+gn!6$ookw&b+o7%p!1q1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['myquizappfzb.herokuapp.com',"127.0.0.1"]
 
@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     "core.backend.quiz.apps.QuizConfig",
     "core.backend.authentication.apps.AuthenticationConfig",
     "core.backend.home.apps.HomeConfig",
+    "core.backend.student.apps.StudentConfig",
+    "core.backend.owner.apps.OwnerConfig",
     "ckeditor",
     "taggit",
 ]
@@ -112,6 +114,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
