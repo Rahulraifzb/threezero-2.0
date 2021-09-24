@@ -43,7 +43,7 @@ class MultipleChoice(models.Model):
     slug = models.SlugField(_("slug"))
     choices = models.ManyToManyField(MultipleChoiceAnswer)
     correct_answer = models.ManyToManyField(MultipleChoiceAnswer, related_name="correct", blank=True)
-    categories = TaggableManager()
+    categories = TaggableManager(blank=False)
     explanation = models.TextField(_('Explain your answer'),blank=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True,blank=True)
 
